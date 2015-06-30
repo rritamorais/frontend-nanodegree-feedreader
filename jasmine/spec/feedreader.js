@@ -9,16 +9,16 @@ $(function() {
         //Ensures each feed has a url and it is not empty
         it('has URL', function() {
             allFeeds.forEach(function(feed) {
-              expect(feed.url).toBeDefined();
-              expect(feed.url.length).not.toBe(0);
+                expect(feed.url).toBeDefined();
+                expect(feed.url.length).not.toBe(0);
             });
         });
 
         //Ensures each feed has a name and it is not empty
         it('has a name', function() {
             allFeeds.forEach(function(feed) {
-              expect(feed.name).toBeDefined();
-              expect(feed.name.length).not.toBe(0);
+                expect(feed.name).toBeDefined();
+                expect(feed.name.length).not.toBe(0);
             });
         });
     });
@@ -45,24 +45,23 @@ $(function() {
         });
 
         it('exist', function(done) {
-          var entries = $('.feed').find('.entry');
-          expect(entries.length).toBeGreaterThan(0);
-          done();
+            var entries = $('.feed').find('.entry');
+            expect(entries.length).toBeGreaterThan(0);
+            done();
         });
     });
-    
+
     describe('New Feed Selection', function() {
         //Ensures when a new feed is loaded by the loadFeed function that the content actually changes
+        //Grabs all the text in the feed and headers
+        var content = $('.feed, h1.header-title').text();
         //Starts the function with index 1 to finish in index 0 and therefore not have to reset the function again
         beforeEach(function(done) {
             loadFeed(1, function() {
-              //Grabs all the text in the feed and headers 
-                content = $('.feed, h1.header-title').text();
-                loadFeed(0, function() {
-                    done(); 
-                });
+                loadFeed(0, done);
             });
         });
+        
         //compares the two contents and makes sure they are different
         it('has new content', function(done) {
             expect($('.feed, h1.header-title').text()).not.toBe(content);
